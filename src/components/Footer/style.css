@@ -1,0 +1,10 @@
+p{
+    direction: rtl;
+    font-size: 13px;   
+    font-weight: bold;
+}
+@media only screen and (min-width: 960px) {
+    p{
+        font-size: 20px;   
+    }
+}
