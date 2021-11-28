@@ -1,6 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
+import Login from './components/Login/index'
+import Panel from './components/Panel/index'
 import 'react-toastify/dist/ReactToastify.css';
 
 import Footer from './components/Footer/index'
@@ -29,12 +31,10 @@ const LandPage = () => {
     <div>
       <BrowserRouter>
         <ToastContainer />
-        <><br /><br /><br /><br /><br /></>
-        {/* <Route path="/" exact strict render={
-          () => (
-            </>
-          )
-        } /> */}
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="controlPanel" element={<Panel />} />
+        </Routes>
         <Footer />
       </BrowserRouter>
     </div>
