@@ -15,6 +15,7 @@ const Login = () => {
     }
     const handleLogin = () => {
         if (username === user && password === pass) {
+            localStorage.setItem("loggedIn", "1")
             notifySuccees("Successful login!")
             movePage("/controlPanel")
         }

@@ -1,8 +1,61 @@
 {
-    "host":"localhost",
-    "port":"3001",
-    "protocol":"http",
-    "urls":{
-        
-    }
+    "host": "localhost",
+    "port": "3001",
+    "protocol": "http",
+    "urls": {},
+    "minisunTree": [
+        {
+            "name": "Tel Aviv",
+            "machines": [
+                {
+                    "name": "V7 Yellow"
+                },
+                {
+                    "name": "V6 Gold"
+                },
+                {
+                    "name": "V6 White"
+                }
+            ]
+        },
+        {
+            "name": "Yavne",
+            "machines": [
+                {
+                    "name": "V7 Yellow"
+                },
+                {
+                    "name": "V6 Gold"
+                },
+                {
+                    "name": "V6 White"
+                }
+            ]
+        },
+        {
+            "name": "Beit Shemesh",
+            "machines": [
+                {
+                    "name": "V6 Gold"
+                },
+                {
+                    "name": "V6 Pink"
+                }
+            ]
+        },
+        {
+            "name": "Rehovot",
+            "machines": [
+                {
+                    "name": "V7 Yellow"
+                },
+                {
+                    "name": "V6 Gold"
+                },
+                {
+                    "name": "V6 White"
+                }
+            ]
+        }
+    ]
 }
