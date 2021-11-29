@@ -44,7 +44,7 @@ const LandPage = () => {
           {
             config.minisunTree.map(branch => {
               return branch.machines.map(machine => {
-                return <Route path={`controlPanel/${branch.name.replace(" ", "")}/${machine.name.replace(" ", "-")}`} element={<Machine branch={branch} />} />
+                return <Route path={`controlPanel/${branch.name.replace(" ", "")}/${machine.name.replace(" ", "-")}`} element={<Machine branch={branch.name} machine={machine.name}/>} />
               })
             })
           }
