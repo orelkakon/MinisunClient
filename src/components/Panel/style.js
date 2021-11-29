@@ -28,13 +28,15 @@ export const Branch = styled.button`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
+    transition: 1s;
+    @media(min-width: 960px) {
+        height: 200px;
+        width: 200px;
+        font-size: 30px;
+    }
     :hover {
         background-color: black;
         color: gold;
         box-shadow: gold 5px 4px;
-    }
-    @media only screen and(min-width: 960px) {
-
     }
 `;

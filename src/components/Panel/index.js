@@ -15,9 +15,9 @@ const Panel = () => {
                 localStorage.getItem("loggedIn") === "1" &&
                 <PanelDiv>
                     {
-                        config.minisunTree.map(branch => {
+                        config.minisunTree.map((branch, index) => {
                             return (
-                                <Branch onClick={() => movePage(`./${branch.name.replace(" ","")}`)}>{branch.name}</Branch>
+                                <Branch key={index} onClick={() => movePage(`./${branch.name.replace(" ", "")}`)}>{branch.name}</Branch>
                             )
                         })
                     }
