@@ -7,7 +7,7 @@ export const PanelDiv = styled.div`
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    min-height: 80vh;
+    min-height: 60vh;
     align-content: center;
 `;
 

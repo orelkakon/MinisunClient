@@ -20,15 +20,16 @@ export const OptionTask = styled.button`
     width: 100px;
     font-size: large;
     margin: 5px;
-    border: gold 3px solid;
+    border: ${props => props.turnOn ? 'green 4px solid;' : 'gold 3px solid;'};
+    opacity: ${props => props.turnOn ? 1 : 0.7};
     border-radius: 10px;
     background-color: black;
     color: gold;
     cursor: pointer;
     transition: 1s;
     @media(max-width: 960px) {
-        height: 80px;
-        width: 80px;
+        height: 90px;
+        width: 90px;
         font-size: 15px;
     }
     :hover {
