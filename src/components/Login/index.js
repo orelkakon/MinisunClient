@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { notifyError, notifySuccees } from '../../App';
+import { notifyError, notifySuccess } from '../../App';
 import { LoginPage, FullLogin, PasswordInput, UsernameInput, LoginButton, LogoImg } from './style'
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ const Login = () => {
     const handleLogin = () => {
         if (username === user && password === pass) {
             localStorage.setItem("loggedIn", "1")
-            notifySuccees("Successful login!")
+            notifySuccess("Successful login!")
             movePage("/controlPanel")
         }
         else {
@@ -29,8 +29,8 @@ const Login = () => {
             <LogoImg />
             <br />
             <FullLogin>
-                <h2>Minisun Management</h2>
-                <h3>Admin Login</h3>
+                <h3 style={{fontFamily:"Verdana, Geneva, Tahoma, sans-serif"}}>Minisun Management</h3>
+                <h3 style={{fontFamily:"Verdana, Geneva, Tahoma, sans-serif"}}>Admin Login</h3>
                 <UsernameInput placeholder="Username..." onChange={e => setUser(e.target.value)} />
                 <br />
                 <PasswordInput type="password" onChange={e => setPass(e.target.value)} placeholder="Password..." />

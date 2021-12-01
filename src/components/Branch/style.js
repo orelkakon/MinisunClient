@@ -13,7 +13,7 @@ export const MachineDiv = styled.div`
 export const Machine = styled.button`
     border: black 3px solid;
     margin: 10px;
-    background-color: gold;
+    background: linear-gradient(to top, orange 0%, #ffde17 100%);
     border-radius: 5px;
     box-shadow: black 2px 1px;
     height: 150px;
@@ -34,8 +34,9 @@ export const Machine = styled.button`
         font-size: 30px;
     }
     :hover {
-        background-color: black;
-        color: gold;
-        box-shadow: gold 5px 4px;
+        background: orange;
+        background-color: orange;
+        color: black;
+        box-shadow: black 5px 4px;
     }
 `;

@@ -19,7 +19,7 @@ export const BackIcon = styled.button`
         transition-duration: 1s; 
     }
     @media(max-width: 960px) {
-        bottom: 60px;
+        bottom: 50px;
     }
     @media(min-width: 960px) {
         top: 30px;

@@ -33,13 +33,13 @@ const Machine = (props) => {
         <FullMachine>
             <BackButton url={`/controlPanel/${props.branch.replace(" ", "")}`} />
             <Title>{`${props.branch} - ${props.machine}`}</Title>
-            <LeftTime hours={400} />
+            <LeftTime hours={100} />
             <br />
             <OptionDiv>
-                <OptionTask onClick={() => handleClick(showStatitsic, setShowStatitsic)} turnOn={showStatitsic}>Show statistics</OptionTask>
+                <OptionTask onClick={() => handleClick(showStatitsic, setShowStatitsic)} turnOn={showStatitsic}>Show average</OptionTask>
                 <OptionTask onClick={() => handleClick(showDetails, setShowDetails)} turnOn={showDetails}>Show details</OptionTask>
                 <OptionTask onClick={() => handleClick(insertDetails, setInsertDetails)} turnOn={insertDetails}>Insert details</OptionTask>
-                <OptionTask onClick={() => handleClick(updateDetails, setUpdateDetails)} turnOn={updateDetails}>Update details</OptionTask>
+                <OptionTask onClick={() => handleClick(updateDetails, setUpdateDetails)} turnOn={updateDetails}>Update bulbs</OptionTask>
             </OptionDiv>
             {
                 showStatitsic ? <Statistics /> :

@@ -10,21 +10,25 @@ export const FullMachine = styled.div`
 `;
 
 export const Title = styled.h1`
+    font-size: xx-large;
+    text-align: center;
     color: gold;
-    text-shadow: black 2px 2px;
-    text-decoration: underline;
+    text-shadow: gray 2px 1px;
+    /* text-decoration: underline; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 `;
 
 export const OptionTask = styled.button`
     height: 100px;
     width: 100px;
     font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 5px;
-    border: ${props => props.turnOn ? 'green 4px solid;' : 'gold 3px solid;'};
+    border: ${props => props.turnOn ? 'black 3px solid;' : 'gold 3px solid;'};
     opacity: ${props => props.turnOn ? 1 : 0.7};
     border-radius: 10px;
-    background-color: black;
-    color: gold;
+    background: linear-gradient(to top, orange 0%, #ffde17 100%);
+    color: black;
     cursor: pointer;
     transition: 1s;
     @media(max-width: 960px) {
@@ -44,5 +48,6 @@ export const OptionDiv = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    text-align: center;
 `;
 

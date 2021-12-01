@@ -16,7 +16,7 @@ export const FullLogin = styled.div`
     text-align: center;
     border: black 2px solid;
     box-shadow: black 3px 2px;
-    background-color: gold;
+    background: linear-gradient(to top, orange 0%, #ffde17 100%);
     border-radius: 10px;
     height: 300px;
     width: 70%;

@@ -15,7 +15,8 @@ const Panel = () => {
             {
                 localStorage.getItem("loggedIn") === "1" ?
                     <>
-                        <h1 style={{textAlign:"center"}}>Welcome Idan 🤩</h1>
+                        <br />
+                        <h1 style={{ textAlign: "center" }}>WELCOME IDAN</h1>
                         <PanelDiv>
                             <BackButton url={'/'} />
                             {

@@ -11,7 +11,7 @@ import config from './config.json'
 
 const properties = {
   position: "top-center",
-  autoClose: 3000,
+  autoClose: 2000,
   hideProgressBar: false,
   closeOnClick: false,
   pauseOnHover: false,
@@ -19,7 +19,7 @@ const properties = {
   progress: undefined
 }
 
-export const notifySuccees = (msg) => {
+export const notifySuccess = (msg) => {
   toast.success(msg, properties)
 }
 

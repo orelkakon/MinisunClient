@@ -1,47 +1,55 @@
-import React from 'react';
-import { FullInsert, RowFlex } from './style'
+import React, { useState } from 'react';
+import { FullInsert, ColumnFlex, Label, Option, Select, Input, SendButton } from './style'
 
 const Insert = () => {
+    const [year, setYear] = useState("")
+    const [month, setMonth] = useState("")
+    const [counter, setCounter] = useState(0)
+    const handleSubmit = () => { 
+        
+    }
     return (
         <FullInsert>
-            <RowFlex>
-                <labal>Enter Year</labal>
-                <select id="Year">
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                </select>
-            </RowFlex>
-            <RowFlex>
-                <label>Enter Month</label>
-                <select id="Month">
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
-                </select>
-            </RowFlex>
-            <RowFlex>
-                <label>Enter Clock Counter</label>
-                <input type="number"></input>
-            </RowFlex>
+            <ColumnFlex>
+                <Label>Enter Year</Label>
+                <Select onChange={(event) => setYear(event.target.value)} defaultValue={new Date().getFullYear()} id="Year">
+                    <Option value="2016">2016</Option>
+                    <Option value="2017">2017</Option>
+                    <Option value="2018">2018</Option>
+                    <Option value="2019">2019</Option>
+                    <Option value="2020">2020</Option>
+                    <Option value="2021">2021</Option>
+                    <Option value="2022">2022</Option>
+                    <Option value="2023">2023</Option>
+                    <Option value="2024">2024</Option>
+                    <Option value="2025">2025</Option>
+                </Select>
+            </ColumnFlex>
             <br />
-            <button>Send</button>
+            <ColumnFlex>
+                <Label>Enter Month</Label>
+                <Select onChange={(event) => setMonth(event.target.value)} defaultValue={new Date().toLocaleString('en-US', {month: 'long'})} id="Month">
+                    <Option value="January">January</Option>
+                    <Option value="February">February</Option>
+                    <Option value="March">March</Option>
+                    <Option value="April">April</Option>
+                    <Option value="May">May</Option>
+                    <Option value="June">June</Option>
+                    <Option value="July">July</Option>
+                    <Option value="August">August</Option>
+                    <Option value="September">September</Option>
+                    <Option value="October">October</Option>
+                    <Option value="November">November</Option>
+                    <Option value="December">December</Option>
+                </Select>
+            </ColumnFlex>
+            <br />
+            <ColumnFlex>
+                <Label>Enter Clock Counter</Label>
+                <Input type="number" onChange={(event) => setCounter(event.target.value)}></Input>
+            </ColumnFlex>
+            <br />
+            <SendButton onClick={() => handleSubmit()}>Submit</SendButton>
         </FullInsert>
     );
 };

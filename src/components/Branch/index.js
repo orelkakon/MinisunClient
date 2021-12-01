@@ -14,7 +14,8 @@ const Branch = (props) => {
             {
                 localStorage.getItem("loggedIn") === "1" ?
                     <>
-                        <h1 style={{ textAlign: "center" }}>Who Your Best 😋</h1>
+                        <br />
+                        <h1 style={{ textAlign: "center" }}>WHO IS YOUR BEST</h1>
                         <MachineDiv>
                             <BackButton url={'/controlPanel'} />
                             {
