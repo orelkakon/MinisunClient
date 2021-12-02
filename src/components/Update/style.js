@@ -7,10 +7,10 @@ export const FullUpdate = styled.div`
     align-content: center;
     align-items: flex-start;
     border: black 4px double;
-    margin-top: 15px;
+    margin-top: 10px;
     background: linear-gradient(to top, orange 0%, #ffde17 100%);
     width: 250px;
-    padding: 10px;
+    padding: 5px;
     box-shadow: black 5px 3px;
 `;
 
@@ -30,14 +30,14 @@ export const Option = styled.option`
 
 export const Select = styled.select`
     width: 140px;
-    height: 30px;
+    height: 27px;
     font-size: large;
     border: black 2px solid;
 `;
 
 export const Input = styled.input`
     width: 210px;
-    height: 30px;
+    height: 27px;
     border: black 2px solid;
 `;
 
