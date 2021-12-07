@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import { FullInsert, ColumnFlex, Label, Option, Select, Input, SendButton } from './style'
+import { InsertNewBulbsData } from './../../api/requests'
+import { notifyError, notifySuccess } from '../../App';
 
-const Insert = () => {
-    const [year, setYear] = useState("")
-    const [month, setMonth] = useState("")
+const Insert = (props) => {
+    const [year, setYear] = useState(new Date().getFullYear())
+    const [month, setMonth] = useState(new Date().toLocaleString('en-US', { month: 'long' }))
     const [counter, setCounter] = useState(0)
-    const handleSubmit = () => { 
-        
+    const handleSubmit = async () => {
+        if (counter > 0) {
+            const response = await InsertNewBulbsData(props.branch, props.machine, year, month, counter)
+            console.log(response);
+            if (response) {
+                notifySuccess('Success to insert!')
+            } else {
+                notifyError('Clock Counter must be above last month clock counter')
+            }
+        } else {
+            notifyError('Clock Counter cannot be 0 or below!')
+        }
     }
     return (
         <FullInsert>
@@ -28,7 +40,7 @@ const Insert = () => {
             <br />
             <ColumnFlex>
                 <Label>Enter Month</Label>
-                <Select onChange={(event) => setMonth(event.target.value)} defaultValue={new Date().toLocaleString('en-US', {month: 'long'})} id="Month">
+                <Select onChange={(event) => setMonth(event.target.value)} defaultValue={new Date().toLocaleString('en-US', { month: 'long' })} id="Month">
                     <Option value="January">January</Option>
                     <Option value="February">February</Option>
                     <Option value="March">March</Option>

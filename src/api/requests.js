@@ -1,78 +1,111 @@
 import axios from "axios"
 import config from "./../config.json"
+import { calculatePrevDate } from './utils'
 
-const {protocol, host, port, urls} = config
-const {insertNewBulbsData, showAverageBulbsData, updateNewSwitchBulbs, showBulbsData} = urls
+const { protocol, host, port, urls } = config
+const { insertBulbsDetails, deleteSpecificClockCounter, deleteSwitchBulbs, showAverageBulbsData, updateNewSwitchBulbs, showBulbsData, getSpecificClockCounter } = urls
 
-export const insertNewBulbsData = async (branch, machine, year, month, clockCounter) => {
+export const InsertNewBulbsData = async (branch, machine, year, month, clockCounter) => {
     const prevDate = calculatePrevDate(year, month)
-    const prevClockCounter = await getSpecificRow()
-    axios({
-        method: 'get',
-        url: `${protocol}://${host}:${port}/${insertNewBulbsData}`,
-        data: {
-            branch,
-            machine,
-            year,
-            month,
-            clockCounter
-        }
-    })
+    const { respYear, respMonth } = prevDate
+    const prevMonthData = await getSpecificRow(branch, machine, respYear, respMonth)
+    const usedMonthCounter = Number(clockCounter) - Number(prevMonthData)
+    if (usedMonthCounter > 0) {
+        const response = await axios({
+            method: 'post',
+            url: `${protocol}://${host}:${port}/${insertBulbsDetails}`,
+            data: {
+                branch,
+                machine,
+                year,
+                month,
+                clockCounter,
+                usedMonthCounter
+            }
+        })
+        return response.data;
+    }
+    return false
 }
 
-export const updateNewSwitchBulbs = (branch, machine, year, month) => {
-    axios({
-        method: 'get',
+export const UpdateNewSwitchBulbs = async (branch, machine, year, month) => {
+    return await axios({
+        method: 'post',
         url: `${protocol}://${host}:${port}/${updateNewSwitchBulbs}`,
         data: {
             branch,
             machine,
             year,
             month,
-            clockCounter
         }
     })
 }
 
-export const showBulbsData = (branch, machine, year) => {
-   axios({
-        method: 'get',
+export const ShowBulbsData = async (branch, machine, year) => {
+    const response = await axios({
+        method: 'post',
         url: `${protocol}://${host}:${port}/${showBulbsData}`,
         data: {
             branch,
             machine,
-            year,
-            month,
-            clockCounter
+            year
         }
     })
+    return response.data;
 }
 
-export const showAverageBulbsData = (branch, machine, year) => {
-   axios({
-        method: 'get',
+export const ShowAverageBulbsData = async (branch, machine, year) => {
+    const response = await axios({
+        method: 'post',
         url: `${protocol}://${host}:${port}/${showAverageBulbsData}`,
         data: {
             branch,
             machine,
-            year,
-            month,
-            clockCounter
+            year
         }
     })
+    return response.data.usedAvg;
 }
 
-export const getSpecificRow = async (branch, machine, year, month) => {
-    axios({
-        method: 'get',
+const getSpecificRow = async (branch, machine, year, month) => {
+    const response = await axios({
+        method: 'post',
         url: `${protocol}://${host}:${port}/${getSpecificClockCounter}`,
         data: {
             branch,
             machine,
             year,
-            month,
-            clockCounter
+            month
         }
     })
+    return response.data.counter_time
 }
 
+export const deleteSpecificRow = async (branch, machine, year, month) => {
+    const response = await axios({
+        method: 'post',
+        url: `${protocol}://${host}:${port}/${deleteSpecificClockCounter}`,
+        data: {
+            branch,
+            machine,
+            year,
+            month
+        }
+    })
+    return response.data
+}
+
+
+export const deleteSwitchTimeBulbs = async (branch, machine, year, month) => {
+    const response = await axios({
+        method: 'post',
+        url: `${protocol}://${host}:${port}/${deleteSwitchBulbs}`,
+        data: {
+            branch,
+            machine,
+            year,
+            month
+        }
+    })
+    return response.data
+}

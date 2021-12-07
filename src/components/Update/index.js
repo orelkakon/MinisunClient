@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { FullUpdate, ColumnFlex, Label, Option, Select, SendButton } from './style'
+import { UpdateNewSwitchBulbs } from './../../api/requests'
 
-const Update = () => {
+const Update = (props) => {
     const [year, setYear] = useState("")
     const [month, setMonth] = useState("")
-    const handleSubmit = () => { 
-        
+    const handleSubmit = async () => {
+        const response = await UpdateNewSwitchBulbs(props.branch, props.machine, year, month)
+        alert(response.data)
+        console.log(response.data);
     }
     return (
         <FullUpdate>
@@ -27,7 +30,7 @@ const Update = () => {
             <br />
             <ColumnFlex>
                 <Label>Enter Month</Label>
-                <Select onChange={(event) => setMonth(event.target.value)} defaultValue={new Date().toLocaleString('en-US', {month: 'long'})} id="Month">
+                <Select onChange={(event) => setMonth(event.target.value)} defaultValue={new Date().toLocaleString('en-US', { month: 'long' })} id="Month">
                     <Option value="January">January</Option>
                     <Option value="February">February</Option>
                     <Option value="March">March</Option>

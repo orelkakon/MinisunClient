@@ -29,6 +29,7 @@ const Machine = (props) => {
             setKind(true)
         }
     }
+    
     return (
         <FullMachine>
             <BackButton url={`/controlPanel/${props.branch.replace(" ", "")}`} />
@@ -42,10 +43,10 @@ const Machine = (props) => {
                 <OptionTask onClick={() => handleClick(updateDetails, setUpdateDetails)} turnOn={updateDetails}>Update bulbs</OptionTask>
             </OptionDiv>
             {
-                showStatitsic ? <Statistics /> :
-                showDetails ? <Present /> :
-                insertDetails ? <Insert /> :
-                updateDetails && <Update /> 
+                showStatitsic ? <Statistics branch={props.branch} machine={props.machine}/> :
+                showDetails ? <Present branch={props.branch} machine={props.machine}/> :
+                insertDetails ? <Insert branch={props.branch} machine={props.machine}/> :
+                updateDetails && <Update branch={props.branch} machine={props.machine}/> 
             }
         </FullMachine>
     );

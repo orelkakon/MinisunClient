@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { FullPresent, ColumnFlex, Label, Option, Select, SendButton } from './style'
+import { ShowBulbsData } from './../../api/requests'
 
-const Present = () => {
+const Present = (props) => {
     const [year, setYear] = useState("")
-    const handleSubmit = () => { 
-        
+    const handleSubmit = async () => {
+        const response = await ShowBulbsData(props.branch, props.machine, year)
+        alert(response.data)
+        console.log(response.data);
     }
     return (
         <FullPresent>

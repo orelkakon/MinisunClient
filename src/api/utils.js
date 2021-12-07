@@ -1,15 +1,16 @@
 export const calculatePrevDate = (year, month) => {
     if (month !== 'January') {
-        const prevMonth = getPrevMonth(month);
-        return { year, prevMonth }
+        const respMonth = getPrevMonth(month);
+        const respYear = year
+        return { respYear, respMonth }
     } else {
-        const prevYear = getPrevYear(year)
-        const oldMonth = 'December'
-        return {prevYear, oldMonth}
+        const respYear = getPrevYear(year)
+        const respMonth = 'December'
+        return { respYear, respMonth }
     }
 }
 
-export const getPrevMonth = (month) => {
+const getPrevMonth = (month) => {
     switch (month) {
         case 'February':
             return 'January'
@@ -33,11 +34,13 @@ export const getPrevMonth = (month) => {
             return 'October'
         case 'December':
             return 'November'
+        default: 
+            return null
     }
 }
 
-export const getPrevYear = (year) => {
-    const year = Number(year)
-    const prevYear = year - 1;
+const getPrevYear = (year) => {
+    const newYear = Number(year)
+    const prevYear = newYear - 1;
     return String(prevYear)
 }

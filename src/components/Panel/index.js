@@ -6,7 +6,6 @@ import BackButton from './../Back/index'
 
 const Panel = () => {
     let history = useNavigate();
-
     const movePage = (path) => {
         history(path)
     }
