@@ -1,33 +1,47 @@
 import React, { useState } from 'react';
+import TableView from './../TableView/index'
 import { FullPresent, ColumnFlex, Label, Option, Select, SendButton } from './style'
-import { ShowBulbsData } from './../../api/requests'
+import { ShowBulbsYearData } from './../../api/requests'
+import { sortByMonth } from './../../api/utils'
 
 const Present = (props) => {
-    const [year, setYear] = useState("")
-    const handleSubmit = async () => {
-        const response = await ShowBulbsData(props.branch, props.machine, year)
-        alert(response.data)
-        console.log(response.data);
+    const [year, setYear] = useState(new Date().getFullYear())
+    const [data, setData] = useState(null)
+    const [table, setTable] = useState(false)
+    const handleSubmit = () => {
+        const getYearData = async () => {
+            const response = await ShowBulbsYearData(props.branch, props.machine, year)
+            const sortedData = sortByMonth(response)
+            setData(sortedData)
+        }
+        getYearData()
+        setTable(true)
     }
     return (
-        <FullPresent>
-            <ColumnFlex>
-                <Label>Enter Year</Label>
-                <Select onChange={(event) => setYear(event.target.value)} defaultValue={new Date().getFullYear()} id="Year">
-                    <Option value="2016">2016</Option>
-                    <Option value="2017">2017</Option>
-                    <Option value="2018">2018</Option>
-                    <Option value="2019">2019</Option>
-                    <Option value="2020">2020</Option>
-                    <Option value="2021">2021</Option>
-                    <Option value="2022">2022</Option>
-                    <Option value="2023">2023</Option>
-                    <Option value="2024">2024</Option>
-                    <Option value="2025">2025</Option>
-                </Select>
-            </ColumnFlex>
-            <SendButton onClick={() => handleSubmit()}>Submit</SendButton>
-        </FullPresent>
+        <>
+            <FullPresent>
+                <ColumnFlex>
+                    <Label>Enter Year</Label>
+                    <Select onChange={(event) => setYear(event.target.value)} defaultValue={new Date().getFullYear()} id="Year">
+                        <Option value="2016">2016</Option>
+                        <Option value="2017">2017</Option>
+                        <Option value="2018">2018</Option>
+                        <Option value="2019">2019</Option>
+                        <Option value="2020">2020</Option>
+                        <Option value="2021">2021</Option>
+                        <Option value="2022">2022</Option>
+                        <Option value="2023">2023</Option>
+                        <Option value="2024">2024</Option>
+                        <Option value="2025">2025</Option>
+                    </Select>
+                </ColumnFlex>
+                <SendButton onClick={() => handleSubmit()}>Submit</SendButton>
+            </FullPresent>
+            <br />
+            {
+                table && <TableView data={data} />
+            }
+        </>
     );
 };
 

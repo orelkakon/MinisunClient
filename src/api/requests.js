@@ -2,8 +2,8 @@ import axios from "axios"
 import config from "./../config.json"
 import { calculatePrevDate } from './utils'
 
-const { protocol, host, port, urls } = config
-const { insertBulbsDetails, deleteSpecificClockCounter, deleteSwitchBulbs, showAverageBulbsData, updateNewSwitchBulbs, showBulbsData, getSpecificClockCounter } = urls
+const { protocol, host, port, urls, use_time } = config
+const { getHours, insertBulbsDetails, deleteSpecificClockCounter, deleteSwitchBulbs, showAverageBulbsData, updateNewSwitchBulbs, showBulbsData, getSpecificClockCounter } = urls
 
 export const InsertNewBulbsData = async (branch, machine, year, month, clockCounter) => {
     const prevDate = calculatePrevDate(year, month)
@@ -41,7 +41,7 @@ export const UpdateNewSwitchBulbs = async (branch, machine, year, month) => {
     })
 }
 
-export const ShowBulbsData = async (branch, machine, year) => {
+export const ShowBulbsYearData = async (branch, machine, year) => {
     const response = await axios({
         method: 'post',
         url: `${protocol}://${host}:${port}/${showBulbsData}`,
@@ -108,4 +108,22 @@ export const deleteSwitchTimeBulbs = async (branch, machine, year, month) => {
         }
     })
     return response.data
+}
+
+export const getSwitchTimeHours = async (branch, machine, currentYear, currentMonth) => {
+    const response = await axios({
+        method: 'post',
+        url: `${protocol}://${host}:${port}/${getHours}`,
+        data: {
+            branch,
+            machine
+        }
+    })
+    if (response.data) {
+        const { year, month } = response.data
+        const startSwitchTimeCounetr = await getSpecificRow(branch, machine, year, month)
+        const currentSwitchTimeCounetr = await getSpecificRow(branch, machine, currentYear, currentMonth)
+        return use_time - (Number(currentSwitchTimeCounetr) - Number(startSwitchTimeCounetr))
+    }
+    return 0
 }

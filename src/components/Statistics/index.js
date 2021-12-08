@@ -7,7 +7,6 @@ const Statistics = (props) => {
     const [result, setResult] = useState(null)
     const handleSubmit = async () => {
         const response = await ShowAverageBulbsData(props.branch, props.machine, year)
-        console.log(response);
         setResult(response)
     }
     return (
@@ -15,7 +14,7 @@ const Statistics = (props) => {
             <FullStatistics>
                 <ColumnFlex>
                     <Label>Enter Year</Label>
-                    <Select onChange={(event) => {setYear(event.target.value); setResult(null)}} defaultValue={new Date().getFullYear()} id="Year">
+                    <Select onChange={(event) => { setYear(event.target.value); setResult(null) }} defaultValue={new Date().getFullYear()} id="Year">
                         <Option value="2016">2016</Option>
                         <Option value="2017">2017</Option>
                         <Option value="2018">2018</Option>
@@ -31,9 +30,13 @@ const Statistics = (props) => {
                 <SendButton onClick={() => handleSubmit()}>Submit</SendButton>
             </FullStatistics>
             {
-                result !== null && (result === 0 ? 
-                    <h1 style={{textAlign:"center"}}>{`The machine was not active in ${year}`}</h1> :
-                    <h1 style={{textAlign:"center"}}>{`Average Usage Time in ${year} is - ${result} hours per month`}</h1>)
+                result !== null && (result === 0 ?
+                    <h1 style={{ textAlign: "center" }}>{`The machine was not active in ${year}`}</h1> :
+                    <>
+                        <h2 style={{ textAlign: "center", textDecoration:"underline" }}>{`Average Usage Time - ${year}`}</h2>
+                        <p style={{ textAlign: "center", fontSize:"x-large", direction:"ltr" }}>{`${Math.round(result * 100) / 100} hours per month`}</p>
+                    </>
+                )
             }
         </>
     );

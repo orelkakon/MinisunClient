@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FullMachine, Title, OptionTask, OptionDiv } from './style';
+import { getSwitchTimeHours } from './../../api/requests'
 import BackButton from './../Back/index';
 import LeftTime from './../LeftTime/index'
 import Statistics from './../Statistics/index'
@@ -12,6 +13,7 @@ const Machine = (props) => {
     const [showDetails, setShowDetails] = useState(false)
     const [insertDetails, setInsertDetails] = useState(false)
     const [updateDetails, setUpdateDetails] = useState(false)
+    const [hours, setHours] = useState(0)
 
     const turnOffAll = () => {
         setShowStatitsic(false)
@@ -29,12 +31,19 @@ const Machine = (props) => {
             setKind(true)
         }
     }
-    
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await getSwitchTimeHours(props.branch, props.machine, new Date().getFullYear(), new Date().toLocaleString('en-US', { month: 'long' }))
+            setHours(response)
+        }
+        fetchData();
+    }, [props.branch, props.machine])
     return (
         <FullMachine>
             <BackButton url={`/controlPanel/${props.branch.replace(" ", "")}`} />
             <Title>{`${props.branch} - ${props.machine}`}</Title>
-            <LeftTime hours={100} />
+            <LeftTime hours={hours} />
             <br />
             <OptionDiv>
                 <OptionTask onClick={() => handleClick(showStatitsic, setShowStatitsic)} turnOn={showStatitsic}>Show average</OptionTask>
@@ -43,10 +52,10 @@ const Machine = (props) => {
                 <OptionTask onClick={() => handleClick(updateDetails, setUpdateDetails)} turnOn={updateDetails}>Update bulbs</OptionTask>
             </OptionDiv>
             {
-                showStatitsic ? <Statistics branch={props.branch} machine={props.machine}/> :
-                showDetails ? <Present branch={props.branch} machine={props.machine}/> :
-                insertDetails ? <Insert branch={props.branch} machine={props.machine}/> :
-                updateDetails && <Update branch={props.branch} machine={props.machine}/> 
+                showStatitsic ? <Statistics branch={props.branch} machine={props.machine} /> :
+                    showDetails ? <Present branch={props.branch} machine={props.machine} /> :
+                        insertDetails ? <Insert branch={props.branch} machine={props.machine} /> :
+                            updateDetails && <Update branch={props.branch} machine={props.machine} />
             }
         </FullMachine>
     );

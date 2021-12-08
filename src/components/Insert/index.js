@@ -10,7 +10,6 @@ const Insert = (props) => {
     const handleSubmit = async () => {
         if (counter > 0) {
             const response = await InsertNewBulbsData(props.branch, props.machine, year, month, counter)
-            console.log(response);
             if (response) {
                 notifySuccess('Success to insert!')
             } else {

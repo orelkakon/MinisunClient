@@ -44,3 +44,12 @@ const getPrevYear = (year) => {
     const prevYear = newYear - 1;
     return String(prevYear)
 }
+
+export const sortByMonth = (arr) => {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    arr.sort(function(a, b){
+        return months.indexOf(a.month)
+             - months.indexOf(b.month);
+    })
+    return arr
+  }

@@ -8,7 +8,6 @@ const Update = (props) => {
     const handleSubmit = async () => {
         const response = await UpdateNewSwitchBulbs(props.branch, props.machine, year, month)
         alert(response.data)
-        console.log(response.data);
     }
     return (
         <FullUpdate>
