@@ -9,6 +9,7 @@ import Update from './../Update/index'
 import Present from './../Present/index'
 
 const Machine = (props) => {
+    const [changeHours, setChangeHours] = useState(false)
     const [showStatitsic, setShowStatitsic] = useState(false)
     const [showDetails, setShowDetails] = useState(false)
     const [insertDetails, setInsertDetails] = useState(false)
@@ -34,11 +35,11 @@ const Machine = (props) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await getSwitchTimeHours(props.branch, props.machine, new Date().getFullYear(), new Date().toLocaleString('en-US', { month: 'long' }))
+            const response = await getSwitchTimeHours(props.branch, props.machine)
             setHours(response)
         }
         fetchData();
-    }, [props.branch, props.machine])
+    }, [props.branch, props.machine, changeHours])
     return (
         <FullMachine>
             <BackButton url={`/controlPanel/${props.branch.replace(" ", "")}`} />
@@ -53,8 +54,8 @@ const Machine = (props) => {
             </OptionDiv>
             {
                 showStatitsic ? <Statistics branch={props.branch} machine={props.machine} /> :
-                    showDetails ? <Present branch={props.branch} machine={props.machine} /> :
-                        insertDetails ? <Insert branch={props.branch} machine={props.machine} /> :
+                    showDetails ? <Present branch={props.branch} machine={props.machine} changeHours={changeHours} setChangeHours={setChangeHours}/> :
+                        insertDetails ? <Insert branch={props.branch} machine={props.machine} changeHours={changeHours} setChangeHours={setChangeHours}/> :
                             updateDetails && <Update branch={props.branch} machine={props.machine} />
             }
         </FullMachine>

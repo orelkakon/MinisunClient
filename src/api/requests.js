@@ -3,7 +3,7 @@ import config from "./../config.json"
 import { calculatePrevDate } from './utils'
 
 const { protocol, host, port, urls, use_time } = config
-const { getHours, insertBulbsDetails, deleteSpecificClockCounter, deleteSwitchBulbs, showAverageBulbsData, updateNewSwitchBulbs, showBulbsData, getSpecificClockCounter } = urls
+const { getHours, insertBulbsDetails, deleteSpecificClockCounter, getMaxCounter, deleteSwitchBulbs, showAverageBulbsData, updateNewSwitchBulbs, showBulbsData, getSpecificClockCounter } = urls
 
 export const InsertNewBulbsData = async (branch, machine, year, month, clockCounter) => {
     const prevDate = calculatePrevDate(year, month)
@@ -110,7 +110,7 @@ export const deleteSwitchTimeBulbs = async (branch, machine, year, month) => {
     return response.data
 }
 
-export const getSwitchTimeHours = async (branch, machine, currentYear, currentMonth) => {
+export const getSwitchTimeHours = async (branch, machine) => {
     const response = await axios({
         method: 'post',
         url: `${protocol}://${host}:${port}/${getHours}`,
@@ -122,8 +122,17 @@ export const getSwitchTimeHours = async (branch, machine, currentYear, currentMo
     if (response.data) {
         const { year, month } = response.data
         const startSwitchTimeCounetr = await getSpecificRow(branch, machine, year, month)
-        const currentSwitchTimeCounetr = await getSpecificRow(branch, machine, currentYear, currentMonth)
-        return use_time - (Number(currentSwitchTimeCounetr) - Number(startSwitchTimeCounetr))
+        const maxCounterTime = await getMaxCounterTime()
+        return use_time - (Number(maxCounterTime.counter_time)) + Number(startSwitchTimeCounetr)
     }
     return 0
+}
+
+
+export const getMaxCounterTime = async () => {
+    const response = await axios({
+        method: 'post',
+        url: `${protocol}://${host}:${port}/${getMaxCounter}`
+    })
+    return response.data
 }

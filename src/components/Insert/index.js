@@ -11,6 +11,7 @@ const Insert = (props) => {
         if (counter > 0) {
             const response = await InsertNewBulbsData(props.branch, props.machine, year, month, counter)
             if (response) {
+                props.setChangeHours(!props.changeHours)
                 notifySuccess('Success to insert!')
             } else {
                 notifyError('Clock Counter must be above last month clock counter')

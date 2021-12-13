@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import deleteLogo from './../../assets/delete.png'
 
 export const TableDiv = styled.div`
     display: flex;
@@ -39,4 +40,23 @@ export const TD = styled.td`
     border-radius: 3px;
     background: linear-gradient(to top, orange 0%, #ffde17 100%);
     padding: 3px;
+`;
+
+export const DeleteButton = styled.button`
+    border: none;
+    background: linear-gradient(to top, orange 0%, #ffde17 100%);
+    cursor: pointer;
+    background-image: url(${deleteLogo});
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+`;  
+
+export const DeleteLogo = styled.img`
+    width: 30px;
+    height: 30px;
 `;

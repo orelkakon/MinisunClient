@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TableView from './../TableView/index'
 import { FullPresent, ColumnFlex, Label, Option, Select, SendButton } from './style'
 import { ShowBulbsYearData } from './../../api/requests'
@@ -8,6 +8,7 @@ const Present = (props) => {
     const [year, setYear] = useState(new Date().getFullYear())
     const [data, setData] = useState(null)
     const [table, setTable] = useState(false)
+    const [changeData, setChangeData] = useState(false)
     const handleSubmit = () => {
         const getYearData = async () => {
             const response = await ShowBulbsYearData(props.branch, props.machine, year)
@@ -17,6 +18,9 @@ const Present = (props) => {
         getYearData()
         setTable(true)
     }
+    useEffect(() => {
+        handleSubmit()
+    },[changeData])
     return (
         <>
             <FullPresent>
@@ -39,7 +43,7 @@ const Present = (props) => {
             </FullPresent>
             <br />
             {
-                table && <TableView data={data} />
+                table && <TableView data={data} branch={props.branch} machine={props.machine} year={year} changeHours={props.changeHours} setChangeHours={props.setChangeHours} changeData={changeData} setChangeData={setChangeData}/>
             }
         </>
     );
