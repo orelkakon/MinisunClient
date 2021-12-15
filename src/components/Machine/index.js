@@ -47,16 +47,16 @@ const Machine = (props) => {
             <LeftTime hours={hours} />
             <br />
             <OptionDiv>
-                <OptionTask onClick={() => handleClick(showStatitsic, setShowStatitsic)} turnOn={showStatitsic}>Show average</OptionTask>
-                <OptionTask onClick={() => handleClick(showDetails, setShowDetails)} turnOn={showDetails}>Show details</OptionTask>
-                <OptionTask onClick={() => handleClick(insertDetails, setInsertDetails)} turnOn={insertDetails}>Insert details</OptionTask>
-                <OptionTask onClick={() => handleClick(updateDetails, setUpdateDetails)} turnOn={updateDetails}>Update bulbs</OptionTask>
+                <OptionTask onClick={() => handleClick(showStatitsic, setShowStatitsic)} turnOn={showStatitsic}>Show Statistics</OptionTask>
+                <OptionTask onClick={() => handleClick(showDetails, setShowDetails)} turnOn={showDetails}>Show Time Details</OptionTask>
+                <OptionTask onClick={() => handleClick(insertDetails, setInsertDetails)} turnOn={insertDetails}>Update Time Details</OptionTask>
+                <OptionTask onClick={() => handleClick(updateDetails, setUpdateDetails)} turnOn={updateDetails}>Update Switch Times</OptionTask>
             </OptionDiv>
             {
                 showStatitsic ? <Statistics branch={props.branch} machine={props.machine} /> :
                     showDetails ? <Present branch={props.branch} machine={props.machine} changeHours={changeHours} setChangeHours={setChangeHours}/> :
                         insertDetails ? <Insert branch={props.branch} machine={props.machine} changeHours={changeHours} setChangeHours={setChangeHours}/> :
-                            updateDetails && <Update branch={props.branch} machine={props.machine} />
+                            updateDetails && <Update branch={props.branch} machine={props.machine} changeHours={changeHours} setChangeHours={setChangeHours}/>
             }
         </FullMachine>
     );

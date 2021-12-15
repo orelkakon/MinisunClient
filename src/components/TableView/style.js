@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import deleteLogo from './../../assets/delete.png'
+import excelLogo from './../../assets/excel.png'
 
 export const TableDiv = styled.div`
     display: flex;
@@ -33,7 +34,7 @@ export const TH = styled.th`
 `;
 
 export const TD = styled.td`
-    border: 3px solid black;
+    border: ${props => props.icon ? "none" : "3px solid black"};
     text-align: center;
     font-size: medium;
     font-weight: 700;
@@ -53,10 +54,19 @@ export const DeleteButton = styled.button`
     -o-background-size: cover;
     background-size: cover;
     width: 30px;
-    height: 30px;
+    height: 38px;
 `;  
 
-export const DeleteLogo = styled.img`
+export const ExcelButton = styled.button`
+    border: none;
+    background: linear-gradient(to top, orange 0%, #ffde17 100%);
+    cursor: pointer;
+    background-image: url(${excelLogo});
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     width: 30px;
-    height: 30px;
-`;
+    height: 38px;
+`;  

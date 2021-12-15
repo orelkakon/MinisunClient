@@ -3,7 +3,7 @@ import config from "./../config.json"
 import { calculatePrevDate } from './utils'
 
 const { protocol, host, port, urls, use_time } = config
-const { getHours, insertBulbsDetails, deleteSpecificClockCounter, getMaxCounter, deleteSwitchBulbs, showAverageBulbsData, updateNewSwitchBulbs, showBulbsData, getSpecificClockCounter } = urls
+const { getHours, insertBulbsDetails, deleteSpecificClockCounter, getMaxCounter, deleteSwitchBulbs, showAverageBulbsData, updateSwitchBulbs, showBulbsData, getSpecificClockCounter } = urls
 
 export const InsertNewBulbsData = async (branch, machine, year, month, clockCounter) => {
     const prevDate = calculatePrevDate(year, month)
@@ -31,7 +31,7 @@ export const InsertNewBulbsData = async (branch, machine, year, month, clockCoun
 export const UpdateNewSwitchBulbs = async (branch, machine, year, month) => {
     return await axios({
         method: 'post',
-        url: `${protocol}://${host}:${port}/${updateNewSwitchBulbs}`,
+        url: `${protocol}://${host}:${port}/${updateSwitchBulbs}`,
         data: {
             branch,
             machine,
@@ -96,15 +96,13 @@ export const deleteSpecificRow = async (branch, machine, year, month) => {
 }
 
 
-export const deleteSwitchTimeBulbs = async (branch, machine, year, month) => {
+export const deleteSwitchTimeBulbs = async (branch, machine) => {
     const response = await axios({
         method: 'post',
         url: `${protocol}://${host}:${port}/${deleteSwitchBulbs}`,
         data: {
             branch,
-            machine,
-            year,
-            month
+            machine
         }
     })
     return response.data

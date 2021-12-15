@@ -1,13 +1,29 @@
 import React, { useState } from 'react';
-import { FullUpdate, ColumnFlex, Label, Option, Select, SendButton } from './style'
-import { UpdateNewSwitchBulbs } from './../../api/requests'
+import { FullUpdate, ColumnFlex, RowFlex, Label, Option, Select, SendButton, ResetButton } from './style'
+import { UpdateNewSwitchBulbs, deleteSwitchTimeBulbs } from './../../api/requests'
+import { notifyError, notifySuccess } from './../../App'
 
 const Update = (props) => {
-    const [year, setYear] = useState("")
-    const [month, setMonth] = useState("")
+    const [year, setYear] = useState(new Date().getFullYear())
+    const [month, setMonth] = useState(new Date().toLocaleString('en-US', { month: 'long' }))
     const handleSubmit = async () => {
         const response = await UpdateNewSwitchBulbs(props.branch, props.machine, year, month)
-        alert(response.data)
+        if (response.data) {
+            props.setChangeHours(!props.changeHours)
+            notifySuccess("Successed update new switch machine bulbs time")
+        } else {
+            notifyError("Failed update new switch machine bulbs time")
+        }
+    }
+
+    const handleReset = async () => {
+        const response = await deleteSwitchTimeBulbs(props.branch, props.machine)
+        if (response) {
+            props.setChangeHours(!props.changeHours)
+            notifySuccess("Successed reset the switch machine bulbs time")
+        } else {
+            notifyError("Failed reset the switch machine bulbs time")
+        }
     }
     return (
         <FullUpdate>
@@ -45,7 +61,10 @@ const Update = (props) => {
                 </Select>
             </ColumnFlex>
             <br />
-            <SendButton onClick={() => handleSubmit()}>Submit</SendButton>
+            <RowFlex>
+                <SendButton onClick={() => handleSubmit()}>Submit</SendButton>
+                <ResetButton onClick={() => handleReset()}>Reset Machine</ResetButton>
+            </RowFlex>
         </FullUpdate>
     );
 };

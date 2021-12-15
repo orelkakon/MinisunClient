@@ -20,6 +20,12 @@ export const ColumnFlex = styled.div`
     justify-content: center;
 `;
 
+export const RowFlex = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
+
 export const Label = styled.label`
     font-size: x-large;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -42,6 +48,23 @@ export const Input = styled.input`
 `;
 
 export const SendButton = styled.button`
+        width: 100px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: large;
+        border: black 2px solid;
+        background-color: white;
+        border-radius: 5px;
+        height: 50px;
+        margin-right: 50px;
+        cursor: pointer;
+        :hover {
+            background: linear-gradient(to top, orange 0%, #ffde17 0%);
+            color: black;
+            transition: 1s;
+        }
+`;
+
+export const ResetButton = styled.button`
         width: 100px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: large;

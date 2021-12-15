@@ -21,6 +21,9 @@ export const Title = styled.h1`
 export const OptionTask = styled.button`
     height: 100px;
     width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: large;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 5px;

@@ -20,6 +20,7 @@ const Present = (props) => {
     }
     useEffect(() => {
         handleSubmit()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[changeData])
     return (
         <>
