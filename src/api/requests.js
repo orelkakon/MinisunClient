@@ -9,7 +9,24 @@ export const InsertNewBulbsData = async (branch, machine, year, month, clockCoun
     const prevDate = calculatePrevDate(year, month)
     const { respYear, respMonth } = prevDate
     const prevMonthData = await getSpecificRow(branch, machine, respYear, respMonth)
-    const usedMonthCounter = Number(clockCounter) - Number(prevMonthData)
+    let usedMonthCounter
+    if(!prevMonthData){
+        usedMonthCounter = clockCounter
+        const response = await axios({
+            method: 'post',
+            url: `${protocol}://${host}:${port}/${insertBulbsDetails}`,
+            data: {
+                branch,
+                machine,
+                year,
+                month,
+                clockCounter,
+                usedMonthCounter // to fix to most closet from below....
+            }
+        })
+        return response.data;
+    }
+    usedMonthCounter = Number(clockCounter) - Number(prevMonthData)
     if (usedMonthCounter > 0) {
         const response = await axios({
             method: 'post',
@@ -119,18 +136,24 @@ export const getSwitchTimeHours = async (branch, machine) => {
     })
     if (response.data) {
         const { year, month } = response.data
-        const startSwitchTimeCounetr = await getSpecificRow(branch, machine, year, month)
-        const maxCounterTime = await getMaxCounterTime()
-        return use_time - (Number(maxCounterTime.counter_time)) + Number(startSwitchTimeCounetr)
+        let startSwitchTimeCounetr = await getSpecificRow(branch, machine, year, month)
+        if(!Number(startSwitchTimeCounetr))
+            startSwitchTimeCounetr = 0
+        const maxCounterTime = await getMaxCounterTime(branch, machine)
+        return use_time - Number(maxCounterTime.counter_time) + Number(startSwitchTimeCounetr)
     }
     return 0
 }
 
 
-export const getMaxCounterTime = async () => {
+export const getMaxCounterTime = async (branch, machine) => {
     const response = await axios({
         method: 'post',
-        url: `${protocol}://${host}:${port}/${getMaxCounter}`
+        url: `${protocol}://${host}:${port}/${getMaxCounter}`,
+        data:{
+            branch,
+            machine
+        }
     })
     return response.data
 }

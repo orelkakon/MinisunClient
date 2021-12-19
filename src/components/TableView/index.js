@@ -40,7 +40,7 @@ const TableView = (props) => {
                 <TBody>
                     <TR>
                         <TH>Month</TH>
-                        <TH>Clcok Conter</TH>
+                        <TH>Time Counter</TH>
                         <TH>Used Time</TH>
                         {
                             props.data?.length > 0 &&

@@ -8,7 +8,7 @@ export const TableDiv = styled.div`
     justify-content: flex-start;
     align-content: center;
     align-items: center;
-    min-height: 80vh;
+    min-height: 120vh;
 `;
 
 export const Table = styled.table`
@@ -16,7 +16,7 @@ export const Table = styled.table`
     border-radius: 5px;
     box-shadow: black 1px 4px;
     padding: 5px;
-    width: 110%;
+    width: 105%;
     background: goldenrod;
 `;
 
